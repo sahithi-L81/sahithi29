@@ -1,0 +1,109 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN2Zrd98d0BeHMYPv9lf9Va",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sahithi-L81/sahithi29/blob/main/IRS-LAB-02\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "  Lowercase Text\n",
+        "def lowercase_text(text):\n",
+        "    return text.lower()\n",
+        "\n",
+        "text = ' AKILA AND PRANITHA .\\nARE  pursuing  post-graduation from SR UNIVERSITY.'\n",
+        "print(lowercase_text(text))\n",
+        "\n",
+        "# 2) Removing Punctuations\n",
+        "import string\n",
+        "\n",
+        "PUNCT_TO_REMOVE = string.punctuation\n",
+        "\n",
+        "def remove_punctuation(text):\n",
+        "    return ' '.join(text.translate(str.maketrans('', '', PUNCT_TO_REMOVE)).split())\n",
+        "\n",
+        "text = \"I'm having a lot of punctuations!!.@@@@@ All special characters will be removed *&&& ;) :) Is  it so ? ## Yes :( I will. \"\n",
+        "print(remove_punctuation(text))\n",
+        "\n",
+        "# 3) Removing Stopwords\n",
+        "import nltk\n",
+        "nltk.download('stopwords')\n",
+        "from nltk.corpus import stopwords\n",
+        "\n",
+        "stoplist = stopwords.words('english')\n",
+        "\n",
+        "text = '''  The rose is a beautiful flower  '''\n",
+        "print(\"\\nOriginal string:\")\n",
+        "print(text)\n",
+        "\n",
+        "clean_word_list = [word for word in text.split() if word not in stoplist]\n",
+        "print(\"\\nAfter removing stop words from the said text:\")\n",
+        "print(clean_word_list)\n",
+        "\n",
+        "# 4) Removing URLs\n",
+        "import re\n",
+        "\n",
+        "def remove_URL(sample):\n",
+        "    \"\"\"Remove URLs from a sample string\"\"\"\n",
+        "    return re.sub(r\"http\\S+\", \"\", sample)\n",
+        "\n",
+        "print(remove_URL('URL of whatsapp https://web.whatsapp.com/'))\n",
+        "\n",
+        "# 5) Removing Emojis\n",
+        "def remove_emoji(string):\n",
+        "    emoji_pattern = re.compile(\"[\"\n",
+        "                             u\"\\U0001F600-\\U0001F64F\"  # emoticons\n",
+        "                             u\"\\U0001F300-\\U0001F5FF\"  # symbols & pictographs\n",
+        "                             u\"\\U0001F680-\\U0001F6FF\"  # transport & map symbols\n",
+        "                             u\"\\U0001F1E0-\\U0001F1FF\"  # flags (iOS)\n",
+        "                             u\"\\u2702-\\u27B0\"\n",
+        "                             u\"\\u24C2-\\U0001F251\"\n",
+        "                             \"]+\", flags=re.UNICODE)\n",
+        "    return emoji_pattern.sub(r'', string)\n",
+        "\n",
+        "print(remove_emoji(\"  Removing emojis for text preprocessing     \"))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "jxy4P_-QJeLa",
+        "outputId": "ce75a3e3-b6b5-4ed5-b043-d71806ad1923"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "invalid syntax (<ipython-input-3-8a52d2c7ae90>, line 1)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-3-8a52d2c7ae90>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Lowercase Text\u001b[0m\n\u001b[0m              ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
