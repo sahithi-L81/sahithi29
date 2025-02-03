@@ -1,0 +1,284 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMCi8H4UiacIUwfqJjoxK/s",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sahithi-L81/sahithi29/blob/main/IRS-LAB-04\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize, sent_tokenize, RegexpTokenizer\n",
+        "\n",
+        "# Download necessary data\n",
+        "nltk.download('punkt_tab')\n",
+        "\n",
+        "def tokenize_words(text):\n",
+        "    return word_tokenize(text)\n",
+        "\n",
+        "def tokenize_sentences(text):\n",
+        "    return sent_tokenize(text)\n",
+        "\n",
+        "def tokenize_characters(text):\n",
+        "    return list(text)\n",
+        "\n",
+        "# Example text\n",
+        "text = \"Hello! This is sahithi I Love to Listen Songs.\"\n",
+        "\n",
+        "# Tokenization\n",
+        "word_tokens = tokenize_words(text)\n",
+        "\n",
+        "# Output results\n",
+        "print(\"Word Tokens:\", word_tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YIUS2JjpVRNn",
+        "outputId": "bd4f1e31-3602-45ce-a97a-9f6a86939e2c"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt_tab to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping tokenizers/punkt_tab.zip.\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Word Tokens: ['Hello', '!', 'This', 'is', 'Varsha', 'I', 'Love', 'to', 'Listen', 'Songs', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from nltk.corpus import stopwords\n",
+        "nltk.download('stopwords')\n",
+        "\n",
+        "# Removing Stop Words\n",
+        "stop_words = set(stopwords.words('english'))\n",
+        "filtered_tokens = [word for word in word_tokens if word.lower() not in stop_words]\n",
+        "\n",
+        "# Output results\n",
+        "print(\"Filtered Tokens (without stop words):\", filtered_tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "SF4XzYPdVhC7",
+        "outputId": "2df8a92b-46da-42bf-f38c-b4990a8d6d5a"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Filtered Tokens (without stop words): ['Hello', '!', 'Varsha', 'Love', 'Listen', 'Songs', '.']\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package stopwords to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping corpora/stopwords.zip.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import string\n",
+        "\n",
+        "# Example text\n",
+        "text = \"Hello! This is sahithi I Love to Listen Songs.\"\n",
+        "\n",
+        "# Removing punctuations\n",
+        "no_punct_text = \"\".join([char for char in text if char not in string.punctuation])\n",
+        "\n",
+        "# Output results\n",
+        "print(\"Text without Punctuation:\", no_punct_text)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "v8bbkw7FVmxk",
+        "outputId": "cbb45d9a-aec4-4b48-ce2f-5f9e7394e18a"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Text without Punctuation: Hello This is sahithi I Love to Listen Songs\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from nltk.stem import PorterStemmer\n",
+        "\n",
+        "# Stemming\n",
+        "stemmer = PorterStemmer()\n",
+        "stemmed_tokens = [stemmer.stem(word) for word in filtered_tokens]\n",
+        "\n",
+        "# Output results\n",
+        "print(\"Stemmed Tokens:\", stemmed_tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hvAJB4puVtUk",
+        "outputId": "52a24dce-5aff-4f48-a434-9137ab0d25a7"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Stemmed Tokens: ['hello', '!', 'varsha', 'love', 'listen', 'song', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from nltk.stem import WordNetLemmatizer\n",
+        "nltk.download('wordnet')\n",
+        "nltk.download('omw-1.4')\n",
+        "\n",
+        "# Lemmatization\n",
+        "lemmatizer = WordNetLemmatizer()\n",
+        "lemmatized_tokens = [lemmatizer.lemmatize(word) for word in filtered_tokens]\n",
+        "\n",
+        "# Output results\n",
+        "print(\"Lemmatized Tokens:\", lemmatized_tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fk8de8MzVwy2",
+        "outputId": "cb1f7d7f-1805-426f-bbe2-38a8179c3e6e"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package wordnet to /root/nltk_data...\n",
+            "[nltk_data] Downloading package omw-1.4 to /root/nltk_data...\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Lemmatized Tokens: ['Hello', '!', 'Varsha', 'Love', 'Listen', 'Songs', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "from nltk.util import ngrams\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "from nltk.corpus import stopwords\n",
+        "import string\n",
+        "\n",
+        "# Download necessary data\n",
+        "nltk.download('punkt')\n",
+        "nltk.download('stopwords')\n",
+        "\n",
+        "# Example text\n",
+        "text = \"Hello! This is sahithi I Love to Listen Songs.\"\n",
+        "\n",
+        "# Removing Punctuations\n",
+        "no_punct_text = \"\".join([char for char in text if char not in string.punctuation])\n",
+        "\n",
+        "# Tokenization\n",
+        "word_tokens = word_tokenize(no_punct_text)\n",
+        "\n",
+        "# Removing Stop Words\n",
+        "stop_words = set(stopwords.words('english'))\n",
+        "filtered_tokens = [word for word in word_tokens if word.lower() not in stop_words]\n",
+        "\n",
+        "# Generating BI-GRAMs\n",
+        "bigrams = list(ngrams(filtered_tokens, 2))\n",
+        "\n",
+        "# Output results\n",
+        "print(\"Bigrams:\", bigrams)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LbKui-LaV0OC",
+        "outputId": "88a92ada-dd6a-4cac-a6d8-aca8a3eabea0"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Bigrams: [('Hello', 'sahithi'), ('sahithi', 'Love'), ('Love', 'Listen'), ('Listen', 'Songs')]\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt is already up-to-date!\n",
+            "[nltk_data] Downloading package stopwords to /root/nltk_data...\n",
+            "[nltk_data]   Package stopwords is already up-to-date!\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
